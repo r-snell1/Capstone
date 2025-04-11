@@ -1,0 +1,51 @@
+frontend/
+├── .idea/                  # Project-specific configuration for JetBrains IDEs (e.g., WebStorm)
+├── .vscode/                # VS Code configuration files
+├── node_modules/           # Node.js modules installed through npm
+├── public/                 # Public files (static files like images, icons, etc.)
+│   └── index.html          # The HTML file for your app
+├── src/                    # Source code for the frontend
+│   ├── api/                # API interaction files (e.g., axios configuration and methods)
+│   │   └── index.js        # Axios setup for API calls (add authentication headers here)
+│   ├── assets/             # Static files like images or global styles
+│   ├── components/         # Vue components (UI components like Login.vue, InventoryList.vue)
+│   │   ├── Login.vue       # Login component
+│   │   ├── InventoryList.vue  # Inventory management component
+│   │   └── ProtectedContent.vue  # Protected route content component
+│   ├── router/             # Vue Router configuration
+│   │   └── index.js        # Router setup (define routes, navigation guards, etc.)
+│   ├── store/              # State management (optional, if you use Vuex)
+│   │   └── index.js        # Store configuration (manage global state)
+│   ├── views/              # Page views (e.g., Home, Dashboard)
+│   │   └── Home.vue        # Home or Dashboard page component
+│   ├── App.vue             # Root Vue component
+│   ├── main.js             # Main entry point for Vue.js
+│   └── styles/             # Global styles (e.g., main.css, variables)
+│       └── main.css        # Main styles for the app
+├── index.html              # HTML file for mounting Vue app
+├── jsconfig.json           # Configuration for JavaScript projects (especially for IDEs)
+├── package.json            # Dependencies and scripts for the project
+├── package-lock.json       # Lock file for the exact versions of npm packages
+├── README.md               # Project documentation (optional, but helpful)
+└── vite.config.js          # Vite configuration (bundler setup)
+
+Key Points:
+	1.	.idea/ and .vscode/ are IDE-specific folders (for JetBrains and VS Code, respectively) and are not necessary for
+	 the runtime but can help you configure your workspace and IDE.
+	2.	node_modules/ contains all the installed npm dependencies. This folder is automatically generated when you
+	run npm install.
+	3.	public/ includes the static files that do not change during app execution, like index.html. This is where the
+	root HTML template for Vue.js is located.
+	4.	src/ contains your actual source code.
+        •	api/ is where you place API-related code such as the axios setup for making HTTP requests
+        (including authentication headers).
+        •	components/ contains reusable Vue components like Login.vue and InventoryList.vue.
+        •	router/ manages routing and navigation (where protected routes and role-based navigation would be handled).
+        •	store/ would be for Vuex state management if you plan to use it.
+        •	views/ holds larger page components that represent full views.
+        •	App.vue is the root component of your Vue app, which gets rendered into index.html.
+        •	main.js is where Vue is initialized and where the root component gets mounted to the DOM.
+        •	styles/ holds global styles such as CSS for the app.
+
+The vite.config.js is the Vite bundler configuration file, and the package.json includes the list of
+dependencies and npm scripts.
