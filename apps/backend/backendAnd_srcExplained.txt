@@ -1,0 +1,24 @@
+backend/
+│── node_modules/          # Dependencies installed via npm
+│── src/
+│   ├── config/
+│   │   ├── db.js          # Database connection setup
+│   │   ├── auth.js        # Authentication and role-based access logic
+│   ├── controllers/
+│   │   ├── authController.js  # Handles login, signup, and authentication
+│   │   ├── inventoryController.js  # Handles CRUD operations for inventory
+│   ├── middleware/
+│   │   ├── authMiddleware.js  # Middleware for authentication & role-based access
+│   ├── models/
+│   │   ├── Inventory.js   # Inventory schema/model
+│   │   ├── User.js        # User schema/model (with roles)
+│   ├── routes/
+│   │   ├── authRoutes.js  # Routes for authentication (login, register)
+│   │   ├── inventoryRoutes.js  # Routes for inventory CRUD operations
+│   ├── app.js             # Express app setup
+│── .env                   # Environment variables (DB connection, secret keys)
+│── .gitignore             # Ignoring node_modules, .env, etc.
+│── package.json           # Dependencies and scripts
+│── package-lock.json      # Lockfile for installed dependencies
+│── README.md              # Documentation for the backend
+│── server.js              # Entry point to start the backend server
