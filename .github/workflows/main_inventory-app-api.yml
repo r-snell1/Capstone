@@ -24,14 +24,14 @@ jobs:
           node-version: '22.x'
 
       - name: npm install, build, and test
-        working-directory: ./inventory-app/apps/api
+        working-directory: inventory-app/apps/api
         run: |
           npm install
           npm run build --if-present
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        working-directory: ./inventory-app/apps/api
+        working-directory: inventory-app/apps/api
         run: zip -r release.zip .
 
       - name: Zip artifact for deployment
@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: ./inventory-app/apps/api/release.zip
+          path: inventory-app/apps/api/release.zip
 
   deploy:
     runs-on: ubuntu-latest
