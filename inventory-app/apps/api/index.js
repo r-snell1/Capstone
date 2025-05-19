@@ -6,8 +6,13 @@ require('dotenv').config({ path: __dirname + '/.env' });
 const app = express();
 const PORT = process.env.PORT || 5055;
 
+const allowedOrigins = ['https://yellow-meadow-055e2b510.6.azurestaticapps.net']
+
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true // if you use cookies or auth
+}));
 app.use(express.json());
 
 // Connect to MongoDB
