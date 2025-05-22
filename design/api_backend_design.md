@@ -64,26 +64,13 @@ sequenceDiagram
     ExpressServer-->>Client: 200 OK + JSON
 ```
 
-## 6. Class Diagram
-```mermaid
-
-classDiagram
-    class Item {
-        +String name
-        +Number quantity
-        +String location
-        +String description
-        +Date createdAt
-        +Date updatedAt
-    }
-```
-## 7. Error Handling
+## 6. Error Handling
 
 - `404 Not Found`: When an item does not exist
 - `400 Bad Request`: Validation errors
 - `500 Internal Server Error`: DB connection or logic failure
 
-## 8. Environment Configuration
+## 7. Environment Configuration
 
 ```dotenv
 MONGO_URI="your-mongodb-connection-string"
