@@ -4,10 +4,15 @@
 ## 1. Backend Overview
 
 - **Framework**: Express.js
+- ***
 - **Database**: MongoDB (via Mongoose)
+- ***
 - **Environment Config**: `.env` for MONGO_URI
+- ***
 - **CORS** enabled for cross-origin access
+- ***
 - **JSON** body parsing with `express.json()`
+- ***
 
 ## 2. Folder Structure
 
