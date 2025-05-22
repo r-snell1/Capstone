@@ -1,7 +1,7 @@
 
 # Inventory App – API & Backend Design
 
-## 1. Stack Overview
+## 1. Backend Overview
 
 - **Framework**: Express.js
 - **Database**: MongoDB (via Mongoose)
