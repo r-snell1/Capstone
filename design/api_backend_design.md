@@ -70,6 +70,8 @@ sequenceDiagram
 - `400 Bad Request`: Validation errors
 - `500 Internal Server Error`: DB connection or logic failure
 
+- paragraph explianation ...
+
 ## 7. Environment Configuration
 
 ```dotenv
