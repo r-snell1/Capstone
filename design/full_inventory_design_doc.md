@@ -4,6 +4,10 @@ ___
 
 # Inventory App Design Document
 
+paragraph explaination...
+
+meant to be generic template for any inventory...
+
 ## 1. System Architecture Overview
 
 ```plaintext
