@@ -14,9 +14,9 @@
     "typescript": "5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
-  "packageManager": "npm@9.6.7",
+  "packageManager": "npm@11.4.1",
   "workspaces": [
     "apps/*",
     "packages/*"
