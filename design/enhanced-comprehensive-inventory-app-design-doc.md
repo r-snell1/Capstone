@@ -15,21 +15,21 @@ The Inventory App is a cross-platform application designed as a generic template
 The system follows a client-server architecture with a RESTful API, enabling web and mobile clients to interact with a centralized backend. Shared logic ensures consistency across platforms.
 
 ```plaintext
-+-------------+     HTTP     +-------------+     Mongoose    +-------------+
-| Vue.js Web  |  <------->   |  Express.js |  <----------->  |  MongoDB    |
-| React Native|              |    API      |                 |             |
-| Swift (iOS) |              |             |                 |             |
-| Kotlin (Android) |         |             |                 |             |
-+-------------+              +-------------+                 +-------------+
-        ^                         ^                                 
-        | Axios                   | CORS, JSON                     
-        |                         |
-        +----- Shared Logic ------+
-              (e.g., @shared/api)
++------------------+     HTTP     +-------------+     Mongoose    +-------------+
+| Vue.js Web       |  <------->   |  Express.js |  <----------->  |  MongoDB    |
+| React Native     |              |    API      |                 |             |
+| Swift (iOS)      |              |             |                 |             |
+| Kotlin (Android) |              |             |                 |             |
++------------------+              +-------------+                 +-------------+
+        ^                               ^                                 
+        | Axios                         | CORS, JSON                     
+        |                               |
+        +-------- Shared Logic ---------+
+                (e.g., @shared/api)
 ```
 
 ### Key Components
-- **Vue.js Web**: A single-page application (SPA) using Vue Router and TailwindCSS.
+- **Vue.js Web**: A single-page application (SPA) using Vue Router and postcss.
 - **React Native Mobile**: A cross-platform mobile app for iOS and Android using React Navigation.
 - **Swift (iOS)**: Native iOS implementation using SwiftUI for performance and Apple ecosystem integration.
 - **Kotlin (Android)**: Native Android implementation using Jetpack Compose for modern, reactive UI and Android-specific features.

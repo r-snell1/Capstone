@@ -8,7 +8,7 @@ This Agile plan outlines the development roadmap for the Inventory App, a cross-
 
 - **Core Features**:
   - CRUD operations (add, view, edit, delete items).
-  - Web frontend with Vue.js, modals, and TailwindCSS.
+  - Web frontend with Vue.js, modals, and custom PostCSS styles (updated from TailwindCSS).
   - Mobile frontend with React Native, transitioning to Swift (iOS) and Kotlin (Android).
   - Express.js REST API with MongoDB.
 - **Enhancements**:
@@ -32,16 +32,16 @@ This Agile plan outlines the development roadmap for the Inventory App, a cross-
 
 ## Team Structure
 
-- **Frontend Developers (2)**: Specialize in Vue.js, TailwindCSS, and web accessibility.
+- **Frontend Developers (2)**: Specialize in Vue.js and web accessibility; now using custom PostCSS styles instead of TailwindCSS.
 - **Backend Developers (2)**: Focus on Express.js, MongoDB, and API integrations (WebSockets, IoT).
-- **Swift iOS Developers (2)**: Develop native iOS app with SwiftUI, handle iOS-specific features (e.g., Core Data).
+- **Swift iOS Developers (2)**: Develop native iOS app with SwiftUI, handle iOS-specific features (e.g., Core Data, AVFoundation).
 - **Android Developers (2)**: Develop native Android app with Jetpack Compose, handle Android-specific features (e.g., CameraX).
 - **QA Engineer (1)**: Conducts unit, integration, and end-to-end testing.
 - **DevOps Engineer (1)**: Manages CI/CD pipeline and deployments.
 
 ## Epics
 
-The project is divided into six epics:
+The project is divided into 6 epics:
 
 1. **Core Inventory Functionality**: CRUD operations, basic UI, API.
 2. **Security and Authentication**: JWT-based authentication, RBAC.
@@ -52,7 +52,7 @@ The project is divided into six epics:
 
 ## Product Backlog
 
-The backlog lists user stories, acceptance criteria, story points (Fibonacci: 1, 2, 3, 5, 8), and MoSCoW prioritization (Must-have, Should-have, Could-have, Won’t-have).
+The backlog lists user stories, acceptance criteria, story points (Fibonacci: 1, 2, 3, 5, 8), and MoSCoW prioritization.
 
 ### Epic 1: Core Inventory Functionality
 - **User Story 1.1**: As a user, I want to add an item to the inventory so I can track new stock.
@@ -182,32 +182,32 @@ The backlog lists user stories, acceptance criteria, story points (Fibonacci: 1,
   - **Priority**: Could-have
 - **User Story 6.3**: As a developer, I want a CI/CD pipeline to automate testing/deployment.
   - **Acceptance Criteria**:
-    - GitHub Actions for Jest, Vitest, Cypress, Detox.
+    - GitHub Actions for Jest, Vitest, Cypress, Detox, XCTest, JUnit.
     - Deploys web to Netlify, backend to AWS.
   - **Story Points**: 5
   - **Priority**: Should-have
 
 ## Sprint Plan with Detailed Task Breakdown
 
-Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estimated hours, and assigned roles. Total hours are estimated assuming a 40-hour workweek per developer (80 hours per pair), with QA and DevOps contributing as needed.
+Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estimated hours, and assigned roles. QA activities are concurrent within sprints. Total hours assume a 40-hour workweek per developer (80 hours per pair).
 
 ### Sprint 1 (Day 1–14): Core Backend and Database
 - **Goal**: Set up Express.js API and MongoDB schema.
 - **Stories**: 1.5 (MongoDB schema, 2 points), 1.1 (Add Item API, 5 points, partial), 1.2 (View Items API, 3 points, partial)
 - **Tasks**:
   - **Task 1: Implement Item schema (2 points, 16 hours, Backend)**
-    - Define schema with Mongoose (name, quantity, etc.) (8 hours).
-    - Add text indexes for name, location; sparse index for sku (4 hours).
-    - Write unit tests with Jest (4 hours).
+    - Define schema with Mongoose (8 hours).
+    - Add text/sparse indexes (4 hours).
+    - Write Jest unit tests (4 hours).
   - **Task 2: Create POST /api/items endpoint (2 points, 16 hours, Backend)**
     - Implement route handler (6 hours).
-    - Add validation for required fields (4 hours).
-    - Write integration tests with Supertest (6 hours).
+    - Add input validation (4 hours).
+    - Write Supertest integration tests (6 hours).
   - **Task 3: Create GET /api/items endpoint (1 point, 8 hours, Backend)**
     - Implement route handler (4 hours).
     - Write integration tests (4 hours).
 - **Total Points**: 5
-- **Total Hours**: 40 (Backend: 40, QA: 4 for test review)
+- **Total Hours**: 40 (Backend: 40, QA: 4 for concurrent test review)
 - **Deliverable**: Functional backend API for adding/viewing items.
 - **Assigned Roles**: Backend (2), QA (1)
 
@@ -217,23 +217,24 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
 - **Tasks**:
   - **Task 1: Create HomePage.vue and ItemList.vue (2 points, 16 hours, Frontend)**
     - Set up Vue Router and HomePage.vue (6 hours).
-    - Implement ItemList.vue with ItemCard.vue (6 hours).
-    - Write unit tests with Vitest (4 hours).
+    - Implement ItemList.vue with ItemCard.vue using custom PostCSS styles instead of TailwindCSS (6 hours).
+    - Write Vitest unit tests (4 hours).
   - **Task 2: Implement AddItemModal.vue (2 points, 16 hours, Frontend)**
-    - Create modal with form (6 hours).
+    - Create modal with form using custom PostCSS styles instead of TailwindCSS (6 hours).
     - Integrate POST /api/items via Axios (6 hours).
-    - Write E2E tests with Cypress (4 hours).
+    - Write Cypress E2E tests (4 hours).
   - **Task 3: Implement EditItemModal.vue (2 points, 16 hours, Frontend)**
-    - Create modal with pre-filled form (6 hours).
+    - Create modal with pre-filled form using custom PostCSS styles instead of TailwindCSS (6 hours).
     - Integrate GET/PUT /api/items/:id (6 hours).
     - Write E2E tests (4 hours).
   - **Task 4: Add delete functionality (1 point, 8 hours, Frontend)**
     - Add delete button with prompt (4 hours).
     - Integrate DELETE /api/items/:id (4 hours).
 - **Total Points**: 7
-- **Total Hours**: 56 (Frontend: 56, QA: 8 for test review)
+- **Total Hours**: 56 (Frontend: 56, QA: 8 for concurrent test review)
 - **Deliverable**: Web app with basic CRUD.
 - **Assigned Roles**: Frontend (2), QA (1)
+- **Dependencies**: Sprint 1 (backend API)
 
 ### Sprint 3 (Day 29–42): React Native Mobile Core
 - **Goal**: Build React Native app for core CRUD.
@@ -242,11 +243,11 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
   - **Task 1: Create HomePage.js and ItemList.js (2 points, 16 hours, Swift/Android)**
     - Set up React Navigation and HomePage.js (6 hours).
     - Implement ItemList.js with FlatList (6 hours).
-    - Write unit tests with Jest (4 hours).
+    - Write Jest unit tests (4 hours).
   - **Task 2: Implement AddItem.js (2 points, 16 hours, Swift/Android)**
     - Create form screen (6 hours).
     - Integrate POST /api/items (6 hours).
-    - Write E2E tests with Detox (4 hours).
+    - Write Detox E2E tests (4 hours).
   - **Task 3: Implement EditItem.js (2 points, 16 hours, Swift/Android)**
     - Create pre-filled form screen (6 hours).
     - Integrate GET/PUT /api/items/:id (6 hours).
@@ -255,9 +256,10 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
     - Add delete button with alert (4 hours).
     - Integrate DELETE /api/items/:id (4 hours).
 - **Total Points**: 7
-- **Total Hours**: 56 (Swift: 28, Android: 28, QA: 8 for test review)
+- **Total Hours**: 56 (Swift: 28, Android: 28, QA: 8 for concurrent test review)
 - **Deliverable**: Mobile app with basic CRUD.
 - **Assigned Roles**: Swift (1), Android (1), QA (1)
+- **Dependencies**: Sprint 1 (backend API)
 
 ### Sprint 4 (Day 43–56): Authentication
 - **Goal**: Implement JWT-based authentication and RBAC.
@@ -275,9 +277,10 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
     - Implement auth middleware (8 hours, Backend).
     - Add role-based UI logic (8 hours, Frontend).
 - **Total Points**: 8
-- **Total Hours**: 64 (Backend: 24, Frontend: 16, Swift: 8, Android: 8, QA: 8 for test review)
+- **Total Hours**: 64 (Backend: 24, Frontend: 16, Swift: 8, Android: 8, QA: 8 for concurrent test review)
 - **Deliverable**: Secure app with login and roles.
 - **Assigned Roles**: Backend (2), Frontend (1), Swift (1), Android (1), QA (1)
+- **Dependencies**: Sprints 1–3 (backend, frontend, mobile)
 
 ### Sprint 5 (Day 57–70): Search and Filtering
 - **Goal**: Add advanced search and filtering.
@@ -286,14 +289,15 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
   - **Task 1: Extend GET /api/items with query parameters (2 points, 16 hours, Backend)**
     - Add query parameter support (8 hours).
     - Write tests (8 hours).
-  - **Task 2: Add search/filter UI (3 points, 24 hours, Frontend/Swift/Android)**
-    - Implement search bar in HomePage.vue (8 hours, Frontend).
+  - **Task 2: Add search/filter UI (3 points, 28 hours, Frontend/Swift/Android)**
+    - Implement search bar in HomePage.vue using custom PostCSS styles instead of TailwindCSS (10 hours, note: increased from 8 hours due to manual styling).
     - Implement search bar in HomePage.js (8 hours, Swift/Android).
-    - Add filter dropdowns (8 hours, Frontend/Swift/Android).
+    - Add filter dropdowns (10 hours, Frontend/Swift/Android, note: increased from 8 hours due to manual styling).
 - **Total Points**: 5
-- **Total Hours**: 40 (Backend: 16, Frontend: 12, Swift: 6, Android: 6, QA: 4 for test review)
+- **Total Hours**: 44 (Backend: 16, Frontend: 14, Swift: 6, Android: 6, QA: 4 for concurrent test review)
 - **Deliverable**: Searchable inventory.
 - **Assigned Roles**: Backend (1), Frontend (1), Swift (1), Android (1), QA (1)
+- **Dependencies**: Sprints 1–3 (backend, frontend, mobile)
 
 ### Sprint 6 (Day 71–84): Offline Support
 - **Goal**: Enable offline mode with sync.
@@ -310,9 +314,10 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
     - Integrate react-native-background-fetch (8 hours).
     - Write tests (8 hours).
 - **Total Points**: 8
-- **Total Hours**: 64 (Backend: 24, Frontend: 12, Swift: 14, Android: 14, QA: 8 for test review)
+- **Total Hours**: 64 (Backend: 24, Frontend: 12, Swift: 14, Android: 14, QA: 8 for concurrent test review)
 - **Deliverable**: Offline-capable mobile app.
 - **Assigned Roles**: Backend (2), Frontend (1), Swift (1), Android (1), QA (1)
+- **Dependencies**: Sprints 1–3 (backend, frontend, mobile)
 
 ### Sprint 7 (Day 85–98): Real-Time Updates
 - **Goal**: Add WebSocket-based real-time updates.
@@ -326,9 +331,10 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
     - Implement socket.io-client in React Native (8 hours, Swift/Android).
     - Write tests (8 hours, Frontend/Swift/Android).
 - **Total Points**: 5
-- **Total Hours**: 40 (Backend: 16, Frontend: 12, Swift: 6, Android: 6, QA: 4 for test review)
+- **Total Hours**: 40 (Backend: 16, Frontend: 12, Swift: 6, Android: 6, QA: 4 for concurrent test review)
 - **Deliverable**: Real-time inventory updates.
 - **Assigned Roles**: Backend (1), Frontend (1), Swift (1), Android (1), QA (1)
+- **Dependencies**: Sprints 1–3 (backend, frontend, mobile)
 
 ### Sprint 8 (Day 99–112): Barcode Scanning
 - **Goal**: Implement barcode/QR code scanning.
@@ -342,9 +348,10 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
     - Add vision-camera scanning in React Native (8 hours, Swift/Android).
     - Write tests (8 hours, Frontend/Swift/Android).
 - **Total Points**: 5
-- **Total Hours**: 40 (Backend: 16, Frontend: 12, Swift: 6, Android: 6, QA: 4 for test review)
+- **Total Hours**: 40 (Backend: 16, Frontend: 12, Swift: 6, Android: 6, QA: 4 for concurrent test review)
 - **Deliverable**: Barcode scanning feature.
 - **Assigned Roles**: Backend (1), Frontend (1), Swift (1), Android (1), QA (1)
+- **Dependencies**: Sprints 1–3 (backend, frontend, mobile)
 
 ### Sprint 9 (Day 113–126): Performance Optimization
 - **Goal**: Optimize performance with pagination and caching.
@@ -360,9 +367,10 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
     - Add virtual scrolling in ItemList.vue (4 hours).
     - Optimize FlatList in React Native (4 hours).
 - **Total Points**: 5
-- **Total Hours**: 40 (Backend: 24, Frontend: 12, QA: 4 for test review)
+- **Total Hours**: 40 (Backend: 24, Frontend: 12, QA: 4 for concurrent test review)
 - **Deliverable**: Faster app performance.
 - **Assigned Roles**: Backend (2), Frontend (1), QA (1)
+- **Dependencies**: Sprints 1–3 (backend, frontend, mobile)
 
 ### Sprint 10 (Day 127–140): Analytics and CI/CD
 - **Goal**: Add analytics dashboard and CI/CD pipeline.
@@ -378,9 +386,10 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
     - Configure GitHub Actions for Jest, Vitest, Cypress, Detox (12 hours).
     - Set up deployment to Netlify and AWS (12 hours).
 - **Total Points**: 8
-- **Total Hours**: 64 (Backend: 16, Frontend: 24, DevOps: 24, QA: 8 for test review)
+- **Total Hours**: 64 (Backend: 16, Frontend: 24, DevOps: 24, QA: 8 for concurrent test review)
 - **Deliverable**: Analytics dashboard, automated testing/deployment.
 - **Assigned Roles**: Backend (1), Frontend (2), DevOps (1), QA (1)
+- **Dependencies**: Sprints 1–3 (backend, frontend, mobile), Sprint 5 (search for analytics data)
 
 ### Sprint 11 (Day 141–154): Native Mobile (Swift iOS)
 - **Goal**: Prototype native iOS app with SwiftUI.
@@ -394,9 +403,10 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
     - Set up URLSession for CRUD operations (12 hours).
     - Write tests with XCTest (12 hours).
 - **Total Points**: 8
-- **Total Hours**: 64 (Swift: 64, QA: 8 for test review)
+- **Total Hours**: 64 (Swift: 64, QA: 8 for concurrent test review)
 - **Deliverable**: Native iOS app prototype.
 - **Assigned Roles**: Swift (2), QA (1)
+- **Dependencies**: Sprint 1 (backend API)
 
 ### Sprint 12 (Day 155–168): Native Mobile (Kotlin Android), Accessibility, IoT
 - **Goal**: Prototype native Android app, add accessibility and IoT.
@@ -409,15 +419,17 @@ Each sprint lasts 14 project days, with tasks broken down into sub-tasks, estima
   - **Task 2: Implement IoT endpoint and RFID support (3 points, 24 hours, Backend/Android)**
     - Create POST /api/iot/rfid endpoint (12 hours, Backend).
     - Add RFID integration for Android (12 hours, Android).
-  - **Task 3: Add accessibility features (2 points, 16 hours, Frontend/Swift/Android)**
-    - Add ARIA labels in Vue.js (6 hours, Frontend).
-    - Add accessibilityLabel in React Native and native apps (10 hours, Swift/Android).
+  - **Task 3: Add accessibility features (2 points, 20 hours, Frontend/Swift/Android)**
+    - Add ARIA labels in Vue.js using custom PostCSS styles (8 hours, note: increased from 6 hours due to manual styling).
+    - Add accessibilityLabel in React Native and native apps (12 hours, Swift/Android).
 - **Total Points**: 10
-- **Total Hours**: 80 (Backend: 12, Frontend: 6, Swift: 5, Android: 57, QA: 8 for test review)
+- **Total Hours**: 84 (Backend: 12, Frontend: 8, Swift: 6, Android: 58, QA: 8 for concurrent test review)
 - **Deliverable**: Native Android app prototype, accessible UI, IoT integration.
 - **Assigned Roles**: Backend (1), Frontend (1), Swift (1), Android (2), QA (1)
+- **Dependencies**: Sprint 1 (backend API)
 
 ### Post-Sprint (Day 169–181): Final Testing and Deployment
+- **Goal**: Conduct final testing and deploy the app.
 - **Tasks**:
   - **Task 1: End-to-end testing (24 hours, QA/Swift/Android)**
     - Test web, React Native, Swift iOS, Kotlin Android (12 hours, QA).
@@ -510,37 +522,37 @@ gantt
 
 ## Milestone Table
 
-| Milestone                        | Description                                           | Completion Day | Stories Completed                 |
-|----------------------------------|-------------------------------------------------------|----------------|-----------------------------------|
-| **M1: Backend Foundation**       | Functional API and MongoDB schema for core CRUD       | Day 14         | 1.5, 1.1 (partial), 1.2 (partial) |
-| **M2: Web MVP**                  | Vue.js app with core CRUD                             | Day 28         | 1.1, 1.2, 1.3, 1.4                |
-| **M3: Mobile MVP**               | React Native app with core CRUD                       | Day 42         | 1.1, 1.2, 1.3, 1.4                |
-| **M4: Secure MVP**               | Authentication and RBAC implemented                   | Day 56         | 2.1, 2.2                          |
-| **M5: Enhanced Features**        | Search, offline support, WebSockets, barcode scanning | Day 112        | 3.1, 3.2, 3.3, 3.4                |
-| **M6: Optimized App**            | Performance enhancements with pagination and caching  | Day 126        | 4.1                               |
-| **M7: Analytics & CI/CD**        | Analytics dashboard and automated testing/deployment  | Day 140        | 3.5, 6.3                          |
-| **M8: Native Mobile Prototypes** | Swift iOS and Kotlin Android apps, accessibility, IoT | Day 168        | 5.1, 5.2, 6.1, 6.2                |
-| **M9: Production Release**       | Fully tested, deployed app across all platforms       | Day 181        | All stories                       |
+| Milestone | Description | Completion Day | Stories Completed |
+|-----------|-------------|----------------|-------------------|
+| **M1: Backend Foundation** | Functional API and MongoDB schema for core CRUD | Day 14 | 1.5, 1.1 (partial), 1.2 (partial) |
+| **M2: Web MVP** | Vue.js app with core CRUD | Day 28 | 1.1, 1.2, 1.3, 1.4 |
+| **M3: Mobile MVP** | React Native app with core CRUD | Day 42 | 1.1, 1.2, 1.3, 1.4 |
+| **M4: Secure MVP** | Authentication and RBAC implemented | Day 56 | 2.1, 2.2 |
+| **M5: Enhanced Features** | Search, offline support, WebSockets, barcode scanning | Day 112 | 3.1, 3.2, 3.3, 3.4 |
+| **M6: Optimized App** | Performance enhancements with pagination and caching | Day 126 | 4.1 |
+| **M7: Analytics & CI/CD** | Analytics dashboard and automated testing/deployment | Day 140 | 3.5, 6.3 |
+| **M8: Native Mobile Prototypes** | Swift iOS and Kotlin Android apps, accessibility, IoT | Day 168 | 5.1, 5.2, 6.1, 6.2 |
+| **M9: Production Release** | Fully tested, deployed app across all platforms | Day 181 | All stories |
 
 ## Dependencies and Risks
 
-### Dependencies
-- **Backend API** (Sprint 1, Day 1–14) must precede frontend development (Sprints 2–3, Day 15–42).
-- **Authentication** (Sprint 4, Day 43–56) is required for RBAC-dependent features (e.g., analytics in Sprint 10, Day 127–140).
-- **CI/CD Pipeline** (Sprint 10, Day 127–140) enhances testing for native apps (Sprints 11–12, Day 141–168).
-- **Search and Filtering** (Sprint 5, Day 57–70) supports analytics data (Sprint 10, Day 127–140).
-
-### Risks
-- **Team Skill Gaps**: Limited Swift/Kotlin expertise. **Mitigation**: Cross-train in Sprints 1–4 (Day 1–56).
-- **Integration Complexity**: WebSockets/IoT compatibility issues. **Mitigation**: Prototype in Sprint 7 (Day 85–98) and Sprint 12 (Day 155–168).
-- **Scope Creep**: Could-have features (analytics, IoT) may delay core features. **Mitigation**: Adhere to MoSCoW prioritization.
-- **Performance Bottlenecks**: Large inventories may slow app. **Mitigation**: Prioritize performance in Sprint 9 (Day 113–126).
+- **Dependencies**:
+  - Backend API (Sprint 1, Day 1–14) must precede frontend development (Sprints 2–3, Day 15–42).
+  - Authentication (Sprint 4, Day 43–56) is required for RBAC-dependent features (e.g., analytics in Sprint 10, Day 127–140).
+  - CI/CD Pipeline (Sprint 10, Day 127–140) enhances testing for native apps (Sprints 11–12, Day 141–168).
+  - Search and Filtering (Sprint 5, Day 57–70) supports analytics data (Sprint 10, Day 127–140).
+- **Risks**:
+  - **Team Skill Gaps**: Limited Swift/Kotlin expertise. **Mitigation**: Cross-train in Sprints 1–4 (Day 1–56).
+  - **Integration Complexity**: WebSockets/IoT compatibility issues. **Mitigation**: Prototype in Sprint 7 (Day 85–98) and Sprint 12 (Day 155–168).
+  - **Scope Creep**: Could-have features (analytics, IoT) may delay core features. **Mitigation**: Adhere to MoSCoW prioritization.
+  - **Performance Bottlenecks**: Large inventories may slow app. **Mitigation**: Prioritize performance in Sprint 9 (Day 113–126).
+  - **Styling Complexity (Updated)**: Team may have limited expertise with custom PostCSS styling after switching from TailwindCSS, potentially increasing styling time for UI tasks in future sprints (e.g., search UI in Sprint 5, accessibility in Sprint 12). **Mitigation**: Provide training on PostCSS and CSS best practices before Sprint 5 (Day 57–70); allocate additional styling time in Sprint 5 and Sprint 12 tasks.
 
 ## Resource Allocation
 
-- **Frontend Developers (2)**: Sprints 2, 5, 7–10, 12 (Day 15–28, 57–140, 155–168) for Vue.js and accessibility.
+- **Frontend Developers (2)**: Sprints 2, 5, 7–10, 12 (Day 15–28, 57–140, 155–168) for Vue.js and accessibility; now using custom PostCSS styles.
 - **Backend Developers (2)**: Sprints 1, 4–10, 12 (Day 1–14, 43–140, 155–168) for Express.js, MongoDB, IoT.
-- **Swift iOS Developers (2)**: Sprints 3–8 (Day 29–112) for React Native, Sprint 11–12 (Day 141–168) for SwiftUI.
+- **Swift iOS Developers (2)**: Sprints 3–8 (Day 29–112) for React Native, Sprints 11–12 (Day 141–168) for SwiftUI.
 - **Android Developers (2)**: Sprints 3–8 (Day 29–112) for React Native, Sprint 12 (Day 155–168) for Jetpack Compose.
 - **QA Engineer (1)**: Sprints 1–12 (Day 1–168) for testing, Post-Sprint (Day 169–181) for E2E testing.
 - **DevOps Engineer (1)**: Sprint 10 (Day 127–140) for CI/CD, Post-Sprint (Day 169–181) for deployment.
@@ -563,10 +575,9 @@ gantt
 - **Day 181 (Post-Sprint)**: Production-ready app, zero critical bugs.
 
 ## Instructions for Use
-
 - **Import into Agile Tools**: Convert backlog to Jira/Trello/Azure DevOps tasks, assigning stories to sprints (e.g., Sprint 1 = Day 1–14).
-- **Customize Timeline**: Map project days to your start date (e.g., Day 1 = project kickoff). 181 days ≈ 36 weeks (9 months) with a 5-day workweek.
-- **Track Progress**: Use sprint plan for planning sessions, ensuring dependencies (e.g., backend before frontend) are met.
+- **Customize Timeline**: Map project days to your start date (post-May 22, 2025). 181 days ≈ 36 weeks (9 months) with a 5-day workweek.
+- **Track Progress**: Use sprint plan and milestone table for planning and reviews, ensuring dependencies are met.
 
 ## Additional Notes
 
@@ -574,6 +585,7 @@ gantt
 - **Team Specialization**: 2 Swift and 2 Android developers ensure native app expertise, with cross-training in Day 1–56 to mitigate skill gaps.
 - **Stakeholder Engagement**: Sprint reviews validate features, especially native apps (Day 141–168).
 - **Risk Mitigation**: Early prototyping (WebSockets: Day 85–98, IoT: Day 155–168) and strict prioritization reduce risks.
+- **Styling Update**: The project initially used TailwindCSS for rapid UI development but switched to custom PostCSS styles post-Sprint 2. Future UI tasks (e.g., Sprint 5, Sprint 12) account for potential increased styling time.
 
 ---
 
