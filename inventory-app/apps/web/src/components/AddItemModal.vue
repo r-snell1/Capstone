@@ -32,6 +32,8 @@
 import { ref } from 'vue'
 import { createItem } from '@shared/api'
 
+const emit = defineEmits(['refresh', 'close'])
+
 const name = ref('')
 const quantity = ref(1)
 const location = ref('')
@@ -42,8 +44,8 @@ const submitItem = async () => {
 
   try {
     await createItem(newItem)
-    $emit('refresh')
-    $emit('close')
+    emit('refresh')
+    emit('close')
   } catch (err) {
     console.error('Error adding item:', err)
     alert('Could not add item.')

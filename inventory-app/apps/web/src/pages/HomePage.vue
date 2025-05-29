@@ -9,62 +9,92 @@
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold text-gray-700">Items</h2>
         <button
-          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          @click="goToAddItem"
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            @click="goToAddItem"
         >
           + Add Item
         </button>
       </div>
 
-      <table class="min-w-full bg-white border border-gray-200 rounded">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="text-left py-2 px-4 border-b">Name</th>
-            <th class="text-left py-2 px-4 border-b">Quantity</th>
-            <th class="text-left py-2 px-4 border-b">Location</th>
-            <th class="text-left py-2 px-4 border-b">Description</th>
-          </tr>
+      <table class="min-w-full divide-y divide-gray-700">
+        <thead class="bg-gray-800">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Name</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Quantity</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Location</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Description</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+        </tr>
         </thead>
-        <tbody>
-          <tr
-            v-for="item in items"
-            :key="item._id"
-            class="hover:bg-gray-50 cursor-pointer"
-            @click="openViewModal(item)"
-          >
-            <td class="py-2 px-4 border-b">{{ item.name }}</td>
-            <td class="py-2 px-4 border-b">{{ item.quantity }}</td>
-            <td class="py-2 px-4 border-b">{{ item.location || 'N/A' }}</td>
-            <td class="py-2 px-4 border-b">{{ item.description || 'N/A' }}</td>
-          </tr>
+        <tbody class="bg-gray-900 divide-y divide-gray-700">
+        <tr v-for="item in items" :key="item._id || item.id">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ item.name }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ item.quantity }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ item.location || 'N/A' }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ item.description || 'N/A' }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm">
+            <button
+                @click.stop="openEditModal(item)"
+                class="text-sm text-white bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded"
+            >
+              Edit
+            </button>
+            <button
+                @click.stop="confirmDelete(item)"
+                class="ml-2 text-sm text-white bg-red-600 hover:bg-red-500 px-3 py-1 rounded"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
         </tbody>
       </table>
     </section>
 
-    <AddItemModal v-if="showAddModal" @close="showAddModal = false" @refresh="loadItems" />
+    <section class="form-section" v-if="showAddModal">
+      <h2 class="form-heading">Add New Item</h2>
+      <AddItemModal @close="showAddModal = false" @refresh="loadItems" />
+    </section>
     <ViewItemModal
-      v-if="showViewModal"
-      :item="selectedItem"
-      @close="showViewModal = false"
-      @refresh="loadItems"
+        v-if="showViewModal"
+        :item="selectedItem"
+        @close="showViewModal = false"
+        @refresh="loadItems"
+    />
+    <section class="form-section" v-if="showEditModal">
+      <h2 class="form-heading">Edit Item</h2>
+      <EditItemModal :item="selectedItem" @close="showEditModal = false" @updated="loadItems" />
+    </section>
+    <DeleteItemModal
+      v-if="showDeleteConfirm"
+      :item="itemToDelete"
+      @cancel="cancelDelete"
+      @confirm="deleteItem"
     />
   </div>
 </template>
 
 <script setup>
+
 import {onMounted, ref} from 'vue'
-import AddItemModal from '@/components/AddItemModal.vue'
 import ViewItemModal from '@/components/ViewItemModal.vue'
-import { fetchItems, createItem, updateItem, deleteItem } from '@shared/api';
+import AddItemModal from '@/components/AddItemModal.vue'
+import EditItemModal from "@/components/EditItemModal.vue";
+import DeleteItemModal from '@/components/DeleteItemModal.vue'
+import { fetchItems } from '@shared/api';
 
 const items = ref([])
 const showAddModal = ref(false)
 const selectedItem = ref(null)
 const showViewModal = ref(false)
+const showEditModal = ref(false)
+const showDeleteConfirm = ref(false)
+const itemToDelete = ref(null)
 
 const loadItems = async () => {
   try {
     const res = await fetchItems();
+    console.log('Fetch items:', res.data)
     items.value = res.data;
   } catch (err) {
     console.error('Failed to fetch items:', err);
@@ -75,10 +105,34 @@ const goToAddItem = () => {
   showAddModal.value = true
 }
 
-const openViewModal = (item) => {
+const openEditModal = (item) => {
   selectedItem.value = item
-  showViewModal.value = true
+  showEditModal.value = true
 }
+
+const confirmDelete = (item) => {
+  itemToDelete.value = item
+  showDeleteConfirm.value = true
+}
+
+const cancelDelete = () => {
+  itemToDelete.value = null
+  showDeleteConfirm.value = false
+}
+
+const deleteItem = async () => {
+  if (!itemToDelete.value || !itemToDelete.value._id) return;
+  try {
+    await fetch(`http://localhost:5055/api/items/${itemToDelete.value._id}`, {
+      method: 'DELETE'
+    });
+    showDeleteConfirm.value = false;
+    itemToDelete.value = null;
+    await loadItems();
+  } catch (error) {
+    console.error('Failed to delete item:', error);
+  }
+};
 
 onMounted(loadItems)
 </script>

@@ -5,9 +5,9 @@
       <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <nav class="space-x-4">
           <RouterLink
-            v-if="route.name === 'AddItem' || route.name === 'EditItem'"
-            to="/"
-            class="text-gray-700 hover:text-blue-600 font-medium"
+              v-if="route.name === 'AddItem' || route.name === 'EditItem'"
+              to="/"
+              class="text-gray-700 hover:text-blue-600 font-medium"
           >
             Home
           </RouterLink>

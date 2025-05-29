@@ -10,14 +10,20 @@
       </div>
       <div class="flex justify-between">
         <button @click="$emit('close')" class="px-4 py-2 border rounded">Close</button>
-        <button @click="updateItem" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Save</button>
+        <button
+          @click="updateItem"
+          :disabled="loading || !editableItem.name || editableItem.quantity < 0"
+          class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Save
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive, toRefs, watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
 const props = defineProps({ item: Object })
 const emit = defineEmits(['refresh', 'close'])
 
@@ -29,14 +35,22 @@ watch(() => props.item, (val) => {
 
 import { updateItem as updateItemApi } from '@shared/api'
 
+const loading = ref(false)
+
 const updateItem = async () => {
+  loading.value = true
   try {
+    editableItem.name = String(editableItem.name).trim()
+    editableItem.location = String(editableItem.location).trim()
+    editableItem.description = String(editableItem.description).trim()
     await updateItemApi(editableItem._id, editableItem)
     emit('refresh')
     emit('close')
   } catch (err) {
     console.error('Error updating item:', err)
     alert('Could not update item.')
+  } finally {
+    loading.value = false
   }
 }
 </script>
