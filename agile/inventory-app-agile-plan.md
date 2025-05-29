@@ -8,7 +8,7 @@ This Agile plan outlines the development roadmap for the Inventory App, a cross-
 
 - **Core Features**:
   - CRUD operations (add, view, edit, delete index).
-  - Web frontend with Vue.js, modals, and custom PostCSS styles (updated from TailwindCSS).
+  - Web frontend with Vue.js, modals, and custom PostCSS styles.
   - Mobile frontend with React Native, transitioning to Swift (iOS) and Kotlin (Android).
   - Express.js REST API with MongoDB.
 - **Enhancements**:
@@ -589,6 +589,7 @@ gantt
 
 ---
 
-**Product Owner**: _TBD_  
-**Scrum Master**: _TBD_  
-**Date Prepared**: 2025-05-15
+**Product Owner**: Ryan A. Snell  
+**Scrum Master**: Ryan A. Snell   
+**Author**: Ryan A. Snell         
+**Date Prepared**: 15 May 2025    

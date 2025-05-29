@@ -89,3 +89,6 @@ This system is a full-stack application that interacts with a cloud-hosted Mongo
 ```
 
 ---
+
+**Author**: Ryan A. Snell    
+**Date**: 10 May 2025

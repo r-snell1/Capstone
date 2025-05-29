@@ -1,4 +1,7 @@
-# Inventory App Design Document - Part 0: Introduction
+# Inventory App Design Document
+- **Author**: Ryan A. Snell
+- **Date**: 29 May 2025
+- **Version**: 1.0
 
 ## Introduction
 
